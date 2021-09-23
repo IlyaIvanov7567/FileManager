@@ -44,47 +44,54 @@ namespace FileManager
                     }
                 }
 
-                // Copy directory
+                // Copy directory and restor last position to cleanup console
                 else if (arr[0] == "dircopy" && arr.Length == 3)
                 {
                     DirectoryInfo diSource = new DirectoryInfo(arr[1]);
                     DirectoryInfo diTarget = new DirectoryInfo(arr[2]);
+                    StartUp.Start();
                     DirCopy.Copy(diSource, diTarget);
                 }
 
-                // Delete directory
+                // Delete directory and restor last position to cleanup console
                 else if (arr[0] == "dirdel" && arr.Length == 2)
                 {
+                    StartUp.Start();
                     DirDelete.Delete(arr[1]);
                 }
 
-                // Directory properties
+                // Directory properties and restor last position to cleanup console
                 else if (arr[0] == "dirinfo" && arr.Length == 2)
                 {
+                    StartUp.Start();
                     DirProperties.Show(arr[1]);
                 }
 
-                // Copy file
+                // Copy file and restor last position to cleanup console
                 else if (arr[0] == "filecopy" && arr.Length == 3)
                 {
+                    StartUp.Start();
                     FileCopy.Copy(arr[1], arr[2]);
                 }
 
-                // Delete file
+                // Delete file and restor last position to cleanup console
                 else if (arr[0] == "filedel" && arr.Length == 2)
                 {
+                    StartUp.Start();
                     FileDelete.Delete(arr[1]);
                 }
 
-                // File properties
+                // File properties and restor last position to cleanup console
                 else if (arr[0] == "fileinfo" && arr.Length == 2)
                 {
+                    StartUp.Start();
                     FileProperties.Show(arr[1]);
                 }
 
-                // Help
+                // Help and restor last position to cleanup console
                 else if (arr[0] == "help" && arr.Length == 1)
                 {
+                    StartUp.Start();
                     Help.Show();
                 }
 
@@ -94,7 +101,7 @@ namespace FileManager
                     break;
                 }
 
-                // Unsupported commands. Restor last position
+                // Unsupported commands and restor last position to cleanup console
                 else
                 {
                     StartUp.Start();
