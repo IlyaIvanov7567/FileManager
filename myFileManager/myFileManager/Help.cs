@@ -6,7 +6,7 @@ namespace FileManager
     {
         public static void Show()
         {
-            Console.WriteLine("Command list:");
+            Console.WriteLine("\t\t\t--Command list--");
             Console.WriteLine("1.help - shows available commands");
             Console.WriteLine("2.cd - shows directories and files in a directory\nArguments: target directory\nExample: cd D:\\directory\\");
             Console.WriteLine("3.cdp - shows directories and files in a directory with paging\nArguments: page number, target directory\nExample: cdp 2 D:\\directory\\");

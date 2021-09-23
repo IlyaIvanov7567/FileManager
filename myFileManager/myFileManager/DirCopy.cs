@@ -7,6 +7,7 @@ namespace FileManager
     {
         public static void Copy(DirectoryInfo source, DirectoryInfo target)
         {
+            DirectoryInfo[] subdis = source.GetDirectories();
 
             // Check if the source folder is the same that target folder
             if (source.FullName.ToLower() == target.FullName.ToLower())
@@ -15,21 +16,19 @@ namespace FileManager
                 return;
             }
 
-            // Check if the source directory exists, if not, return
+            // Check the source directory exists. If not, return
             if (Directory.Exists(source.FullName) == false)
             {
                 Console.WriteLine("Non-existent source directory");
                 return;
             }
 
-            // Check if the target directory exists, if not, create it
-            if (Directory.Exists(target.FullName) == false)
-            {
-                Directory.CreateDirectory(target.FullName);
-            }
+            // If the destination directory doesn't exist, create it.       
+            Directory.CreateDirectory(target.FullName);
 
             // Copy each file into it's new directory
-            foreach (FileInfo fi in source.GetFiles())
+            FileInfo[] fis = source.GetFiles();
+            foreach (FileInfo fi in fis)
             {
                 // Try to copy file
                 try
@@ -49,13 +48,15 @@ namespace FileManager
             }
 
             // Copy each subdirectory using recursion
-            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+            
+            foreach (DirectoryInfo subdi in subdis)
             {
                 // Try to copy subdirectory
                 try
                 {
-                    DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
-                    Copy(diSourceSubDir, nextTargetSubDir);
+                    string tempPath = Path.Combine(target.FullName, subdi.Name);
+                    //DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(di.Name);
+                    Copy(subdi, new DirectoryInfo(tempPath));
                 }
 
                 // Inform and log exception
