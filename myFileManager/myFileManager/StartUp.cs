@@ -17,7 +17,7 @@ namespace FileManager
             }
 
             // If the last directory exist, try to show it
-            if (arr[0] == "cd" && arr.Length == 2)
+            if (arr[0] == "cd" && arr.Length == 2 && Directory.Exists(arr[1]))
             {
                 ChangeDir.Show(arr[1]);
 
