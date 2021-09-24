@@ -23,7 +23,7 @@ namespace FileManager
                 // Change directory
                 else if (arr[0] == "cd" && arr.Length == 2)
                 {
-                    // Check directory exists 
+                    // Check the directory exists 
                     if (Directory.Exists(arr[1]))
                     {
                         // Save work directory
@@ -46,10 +46,11 @@ namespace FileManager
                 // Change directory with paging
                 else if (arr[0] == "cdp" && arr.Length == 3)
                 {
+                    // Check the directory exists
                     if (Directory.Exists(arr[2]))
                     {
                         bool isnumber = Byte.TryParse(arr[1], out byte page);
-                        if (isnumber)
+                        if (isnumber && Byte.Parse(arr[1])>0)
                         {
                             // Save work directory
                             Properties.Settings.Default.LastDir = input;
@@ -57,7 +58,6 @@ namespace FileManager
 
                             // Show directory attachment with paging
                             ChangeDirPaging.Show(arr[2], page);
-
                         }
 
                         // Restor last work directory
@@ -65,13 +65,16 @@ namespace FileManager
                         else
                         {
                             StartUp.Start();
-                            Console.WriteLine("Wrong page");
+                            Console.WriteLine("Wrong page. Available page 1..255.");
                         }
                     }
+
+                    // Restor last work directory
+                    // Inform, that the directory does not exist
                     else
                     {
                         StartUp.Start();
-                        Console.WriteLine("Non-existent directory");
+                        Console.WriteLine("Non-existent directory: {0}", arr[2]);
                     }
                 }
 
@@ -136,7 +139,7 @@ namespace FileManager
                 else
                 {
                     StartUp.Start();
-                    Console.WriteLine("Invalid command");
+                    Console.WriteLine("Invalid command. Type help for more info.");
                 }
             }
         }

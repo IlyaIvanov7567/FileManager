@@ -7,7 +7,7 @@ namespace FileManager
     {
         public static void Copy(DirectoryInfo source, DirectoryInfo target)
         {
-           
+
             // Check if the source folder is the same that target folder
             if (source.FullName.ToLower() == target.FullName.ToLower())
             {
@@ -15,16 +15,16 @@ namespace FileManager
                 return;
             }
 
-            // Check the source directory exists. If not, return
+            // Check the source directory exists
             if (Directory.Exists(source.FullName) == false)
             {
-                Console.WriteLine("Non-existent source directory");
+                Console.WriteLine("Non-existent source directory: {0}", source.FullName);
                 return;
             }
 
             DirectoryInfo[] subdis = source.GetDirectories();
 
-            // If the destination directory doesn't exist, create it.       
+            // If the target directory doesn't exist, create it       
             Directory.CreateDirectory(target.FullName);
 
             // Copy each file into it's new directory
@@ -34,7 +34,7 @@ namespace FileManager
                 // Try to copy file
                 try
                 {
-                    Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
+                    Console.WriteLine(@"Copied file {0} to {1}", fi.Name, target);
                     fi.CopyTo(Path.Combine(target.ToString(), fi.Name), true);
                 }
 
@@ -43,20 +43,18 @@ namespace FileManager
                 {
                     Console.Write(e.Message);
 
-                    string log = $"\n{DateTime.Now} {e.Message}sourceFile: {source} targetDir: {target}\n{e.StackTrace}";
+                    string log = $"\n{DateTime.Now} {e.Message}sourceDir: {source} targetDir: {target} file: {fi.Name}\n{e.StackTrace}";
                     File.AppendAllText($"{Directory.GetCurrentDirectory()}\\error\\log.txt", log);
                 }
             }
 
             // Copy each subdirectory using recursion
-            
             foreach (DirectoryInfo subdi in subdis)
             {
                 // Try to copy subdirectory
                 try
                 {
                     string tempPath = Path.Combine(target.FullName, subdi.Name);
-                    //DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(di.Name);
                     Copy(subdi, new DirectoryInfo(tempPath));
                 }
 
@@ -65,7 +63,7 @@ namespace FileManager
                 {
                     Console.Write(e.Message);
 
-                    string log = $"\n{DateTime.Now} {e.Message}sourceFile: {source} targetDir: {target}\n{e.StackTrace}";
+                    string log = $"\n{DateTime.Now} {e.Message}sourceDir: {source} targetDir: {target} subDir: {subdi}\n{e.StackTrace}";
                     File.AppendAllText($"{Directory.GetCurrentDirectory()}\\error\\log.txt", log);
                 }
             }

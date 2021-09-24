@@ -24,7 +24,7 @@ namespace FileManager
             int i = 0;
             int firstitem = i + (pageitem * (page - 1));
 
-            // Show element
+            // Output element
             while (i < pageitem && firstitem < listcount)
             {
                 Console.WriteLine(list.ElementAt<FileSystemInfo>(firstitem));
