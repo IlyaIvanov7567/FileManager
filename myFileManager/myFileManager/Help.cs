@@ -6,7 +6,9 @@ namespace FileManager
     {
         public static void Show()
         {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("\t\t\t--Command list--");
+            Console.ResetColor();
             Console.WriteLine("1.cd - shows directories and files in a directory\n  Arguments: target directory\n  Example: cd D:\\directory\\");
             Console.WriteLine("2.cdp - shows directories and files in a directory with paging\n  Arguments: page number, target directory\n  Example: cdp 2 D:\\directory\\");
             Console.WriteLine("3.cdhome - shows available drives");

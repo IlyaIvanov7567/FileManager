@@ -16,13 +16,17 @@ namespace FileManager
                 try
                 {
                     File.Delete(file);
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("Fle {0} deleted", file);
+                    Console.ResetColor();
                 }
 
                 // Inform and log exception
                 catch (Exception e)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write(e.Message);
+                    Console.ResetColor();
 
                     string log = $"\n{DateTime.Now} Msg: {e.Message}File: {file}\n{e.StackTrace}";
                     File.AppendAllText("log.txt", log);
@@ -33,7 +37,9 @@ namespace FileManager
             // Inform, that the file does not exist
             else
             {
-                Console.WriteLine("File not found");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("File {0} not found", file);
+                Console.ResetColor();
             }
         }
     }

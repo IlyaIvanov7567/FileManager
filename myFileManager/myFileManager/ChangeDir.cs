@@ -12,7 +12,9 @@ namespace FileManager
             DirectoryInfo[] dirs = di.GetDirectories();
 
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("\t\t\t--Directory: {0}--", di.FullName);
+            Console.ResetColor();
 
             // Output all directories
             foreach (var dir in dirs)

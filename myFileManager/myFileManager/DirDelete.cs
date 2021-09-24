@@ -14,13 +14,17 @@ namespace FileManager
                 try
                 {
                     Directory.Delete(path, true);
-                    Console.WriteLine("Directory {0} deleted", path);
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("Deleted directory {0}", path);
+                    Console.ResetColor();
                 }
 
                 // Inform and log exception
                 catch (Exception e)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write(e.Message);
+                    Console.ResetColor();
 
                     string log = $"\n{DateTime.Now} Msg: {e.Message}File: {path}\n{e.StackTrace}";
                     File.AppendAllText($"{Directory.GetCurrentDirectory()}\\error\\log.txt", log);
@@ -31,7 +35,9 @@ namespace FileManager
             // Inform, that the directory does not exist
             else
             {
-                Console.WriteLine("Directroy not found");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Directroy {0} not found", path);
+                Console.ResetColor();
             }
         }
     }

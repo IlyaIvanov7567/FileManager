@@ -39,7 +39,9 @@ namespace FileManager
                     else
                     {
                         StartUp.Start();
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("Non-existent directory: {0}", arr[1]);
+                        Console.ResetColor();
                     }
                 }
 
@@ -60,25 +62,30 @@ namespace FileManager
                             ChangeDirPaging.Show(arr[2], page);
                         }
 
-                        // Restor last work directory
+                        // Restor last work directory to cleanup console
                         // Inform, that the directory does not exist
                         else
                         {
                             StartUp.Start();
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.WriteLine("Wrong page. Available page 1..255.");
+                            Console.ResetColor();
                         }
                     }
 
-                    // Restor last work directory
+                    // Restor last work directory to cleanup console
                     // Inform, that the directory does not exist
                     else
                     {
                         StartUp.Start();
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("Non-existent directory: {0}", arr[2]);
+                        Console.ResetColor();
                     }
                 }
 
-                // Copy directory and restor last position to cleanup console
+                // Restor last work directory to cleanup console
+                // Copy directory
                 else if (arr[0] == "dircopy" && arr.Length == 3)
                 {
                     DirectoryInfo diSource = new DirectoryInfo(arr[1]);
@@ -87,42 +94,48 @@ namespace FileManager
                     DirCopy.Copy(diSource, diTarget);
                 }
 
-                // Delete directory and restor last position to cleanup console
+                // Restor last work directory to cleanup console
+                // Delete directory
                 else if (arr[0] == "dirdel" && arr.Length == 2)
                 {
                     StartUp.Start();
                     DirDelete.Delete(arr[1]);
                 }
 
-                // Directory properties and restor last position to cleanup console
+                // Restor last work directory to cleanup console
+                // Directory properties
                 else if (arr[0] == "dirinfo" && arr.Length == 2)
                 {
                     StartUp.Start();
                     DirProperties.Show(arr[1]);
                 }
 
-                // Copy file and restor last position to cleanup console
+                // Restor last work directory to cleanup console
+                // Copy file
                 else if (arr[0] == "filecopy" && arr.Length == 3)
                 {
                     StartUp.Start();
                     FileCopy.Copy(arr[1], arr[2]);
                 }
 
-                // Delete file and restor last position to cleanup console
+                // Restor last work directory to cleanup console
+                // Delete file
                 else if (arr[0] == "filedel" && arr.Length == 2)
                 {
                     StartUp.Start();
                     FileDelete.Delete(arr[1]);
                 }
 
-                // File properties and restor last position to cleanup console
+                // Restor last work directory to cleanup console
+                // File properties
                 else if (arr[0] == "fileinfo" && arr.Length == 2)
                 {
                     StartUp.Start();
                     FileProperties.Show(arr[1]);
                 }
 
-                // Help and restor last position to cleanup console
+                // Restor last work directory to cleanup console
+                // Show Help
                 else if (arr[0] == "help" && arr.Length == 1)
                 {
                     StartUp.Start();
@@ -135,11 +148,14 @@ namespace FileManager
                     break;
                 }
 
-                // Unsupported commands and restor last position to cleanup console
+                // Restor last work directory to cleanup console
+                // Inform Unsupported commands
                 else
                 {
                     StartUp.Start();
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("Invalid command. Type help for more info.");
+                    Console.ResetColor();
                 }
             }
         }

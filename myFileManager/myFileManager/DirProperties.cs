@@ -17,6 +17,9 @@ namespace FileManager
                 FileAttributes attributes = File.GetAttributes(path);
                 long dirsize = DirSize(di);
 
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("\n\t\t\t--Info--");
+                Console.ResetColor();
                 Console.WriteLine("Name: \t\t{0}", di.Name);
                 Console.WriteLine("Path: \t\t{0}", di.FullName);
                 Console.WriteLine("Size: \t\t{0} byte", dirsize);
@@ -27,7 +30,9 @@ namespace FileManager
             }
             else
             {
-                Console.WriteLine("Directory not found");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Directory {0} not found", path);
+                Console.ResetColor();
             }
         }
 
@@ -35,7 +40,7 @@ namespace FileManager
         {
             long size = 0;
 
-            // Count file sizes.
+            // Count file sizes
             try
             {
                 FileInfo[] filess = path.GetFiles();
@@ -48,12 +53,15 @@ namespace FileManager
             // Inform and log exception
             catch (Exception e)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine(e.Message);
+                Console.ResetColor();
+
                 string log = $"\n{DateTime.Now} {e.Message}\n{e.StackTrace}";
                 File.AppendAllText($"{Directory.GetCurrentDirectory()}\\error\\log.txt", log);
             }
 
-            // Count subdirectory sizes.
+            // Count subdirectory sizes
             try
             {
                 DirectoryInfo[] dirs = path.GetDirectories();
@@ -66,7 +74,10 @@ namespace FileManager
             // Inform and log exception
             catch (Exception e)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine(e.Message);
+                Console.ResetColor();
+                
                 string log = $"\n{DateTime.Now} {e.Message}\n{e.StackTrace}";
                 File.AppendAllText($"{Directory.GetCurrentDirectory()}\\error\\log.txt", log);
             }

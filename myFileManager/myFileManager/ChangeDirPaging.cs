@@ -19,7 +19,9 @@ namespace FileManager
             var listcount = list.Count<FileSystemInfo>();
 
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("\t\t\t--Directory: {0}--", di.FullName);
+            Console.ResetColor();
 
             int i = 0;
             int firstitem = i + (pageitem * (page - 1));
@@ -37,7 +39,9 @@ namespace FileManager
             {
                 Console.WriteLine("Empty page");
             }
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("\t--Page: {0}; Items per page: {1}; Total items: {2}--", page, pageitem, listcount);
+            Console.ResetColor();
             MenuBar.Show();
         }
     }

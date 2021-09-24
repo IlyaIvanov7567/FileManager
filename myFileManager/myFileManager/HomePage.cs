@@ -10,7 +10,9 @@ namespace FileManager
             string[] drives = Directory.GetLogicalDrives();
 
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("\t\t\t--Directory: root--");
+            Console.ResetColor();
 
             // Show all drives
             foreach (var drive in drives)

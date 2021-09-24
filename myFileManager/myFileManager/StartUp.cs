@@ -10,7 +10,7 @@ namespace FileManager
 
             string[] arr = Properties.Settings.Default.LastDir.Split();
 
-            // Check error folder exists, if not, create it
+            // Check the error folder exists, if not, create it
             if (Directory.Exists($"{Directory.GetCurrentDirectory()}\\error") == false)
             {
                 Directory.CreateDirectory($"{Directory.GetCurrentDirectory()}\\error");
@@ -22,7 +22,7 @@ namespace FileManager
                 ChangeDir.Show(arr[1]);
 
             }
-            else if (arr[0] == "cdp" && arr[1] != null && arr.Length == 3 && Directory.Exists(arr[2]))
+            else if (arr[0] == "cdp" && arr.Length == 3 && Directory.Exists(arr[2]))
             {
                 var page = Byte.Parse(arr[1]);
                 ChangeDirPaging.Show(arr[2], page);

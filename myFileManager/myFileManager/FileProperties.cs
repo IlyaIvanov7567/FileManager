@@ -13,7 +13,10 @@ namespace FileManager
                 DateTime dtCreated = fi.CreationTime;
                 DateTime dtModified = fi.LastWriteTime;
                 FileAttributes attributes = File.GetAttributes(file);
-                
+
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("\n\t\t\t--Info--");
+                Console.ResetColor();
                 Console.WriteLine("Name: \t\t{0}", fi.Name);
                 Console.WriteLine("Extension: \t{0}", fi.Extension);
                 Console.WriteLine("Path: \t\t{0}", fi.DirectoryName);
@@ -25,7 +28,9 @@ namespace FileManager
             }
             else
             {
-                Console.WriteLine("File not found");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("File {0} not found", file);
+                Console.ResetColor();
             }
         }
     }

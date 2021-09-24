@@ -11,14 +11,18 @@ namespace FileManager
             // Check if the source folder is the same that target folder
             if (source.FullName.ToLower() == target.FullName.ToLower())
             {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("Folder {0} cannot be copied to folder {1}", source.FullName, target.FullName);
+                Console.ResetColor();
                 return;
             }
 
             // Check the source directory exists
             if (Directory.Exists(source.FullName) == false)
             {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Non-existent source directory: {0}", source.FullName);
+                Console.ResetColor();
                 return;
             }
 
@@ -34,14 +38,18 @@ namespace FileManager
                 // Try to copy file
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine(@"Copied file {0} to {1}", fi.Name, target);
+                    Console.ResetColor();
                     fi.CopyTo(Path.Combine(target.ToString(), fi.Name), true);
                 }
 
                 // Inform and log exception
                 catch (Exception e)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write(e.Message);
+                    Console.ResetColor();
 
                     string log = $"\n{DateTime.Now} {e.Message}sourceDir: {source} targetDir: {target} file: {fi.Name}\n{e.StackTrace}";
                     File.AppendAllText($"{Directory.GetCurrentDirectory()}\\error\\log.txt", log);
@@ -61,7 +69,9 @@ namespace FileManager
                 // Inform and log exception
                 catch (Exception e)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write(e.Message);
+                    Console.ResetColor();
 
                     string log = $"\n{DateTime.Now} {e.Message}sourceDir: {source} targetDir: {target} subDir: {subdi}\n{e.StackTrace}";
                     File.AppendAllText($"{Directory.GetCurrentDirectory()}\\error\\log.txt", log);
