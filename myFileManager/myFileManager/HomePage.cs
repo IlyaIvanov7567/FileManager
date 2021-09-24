@@ -18,8 +18,10 @@ namespace FileManager
                 Console.WriteLine(drive);
             }
 
-            // Reset last directory
+            // Reset work directory
             Properties.Settings.Default.Reset();
+
+            MenuBar.Show();
         }
     }
 }

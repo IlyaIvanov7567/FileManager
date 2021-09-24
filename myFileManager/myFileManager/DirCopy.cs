@@ -7,8 +7,7 @@ namespace FileManager
     {
         public static void Copy(DirectoryInfo source, DirectoryInfo target)
         {
-            DirectoryInfo[] subdis = source.GetDirectories();
-
+           
             // Check if the source folder is the same that target folder
             if (source.FullName.ToLower() == target.FullName.ToLower())
             {
@@ -22,6 +21,8 @@ namespace FileManager
                 Console.WriteLine("Non-existent source directory");
                 return;
             }
+
+            DirectoryInfo[] subdis = source.GetDirectories();
 
             // If the destination directory doesn't exist, create it.       
             Directory.CreateDirectory(target.FullName);

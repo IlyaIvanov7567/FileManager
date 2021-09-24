@@ -18,33 +18,60 @@ namespace FileManager
                 if (arr[0] == "cdhome" && arr.Length == 1)
                 {
                     HomePage.Home();
-                    MenuBar.Show();
                 }
 
                 // Change directory
                 else if (arr[0] == "cd" && arr.Length == 2)
                 {
-                    Properties.Settings.Default.LastDir = input;
-                    Properties.Settings.Default.Save();
-                    ChangeDir.Show(arr[1]);
-                    MenuBar.Show();
+                    // Check directory exists 
+                    if (Directory.Exists(arr[1]))
+                    {
+                        // Save work directory
+                        Properties.Settings.Default.LastDir = input;
+                        Properties.Settings.Default.Save();
+
+                        // Show directory attachment
+                        ChangeDir.Show(arr[1]);
+                    }
+
+                    // Restor last work directory
+                    // Inform, that the directory does not exist
+                    else
+                    {
+                        StartUp.Start();
+                        Console.WriteLine("Non-existent directory: {0}", arr[1]);
+                    }
                 }
 
                 // Change directory with paging
-                else if (arr[0] == "cdp" && arr[1] != null && arr.Length == 3)
+                else if (arr[0] == "cdp" && arr.Length == 3)
                 {
-                    bool isnumber = Byte.TryParse(arr[1], out byte page);
-                    if (isnumber)
+                    if (Directory.Exists(arr[2]))
                     {
-                        Properties.Settings.Default.LastDir = input;
-                        Properties.Settings.Default.Save();
-                        ChangeDirPaging.Show(arr[2], page);
-                        MenuBar.Show();
+                        bool isnumber = Byte.TryParse(arr[1], out byte page);
+                        if (isnumber)
+                        {
+                            // Save work directory
+                            Properties.Settings.Default.LastDir = input;
+                            Properties.Settings.Default.Save();
+
+                            // Show directory attachment with paging
+                            ChangeDirPaging.Show(arr[2], page);
+
+                        }
+
+                        // Restor last work directory
+                        // Inform, that the directory does not exist
+                        else
+                        {
+                            StartUp.Start();
+                            Console.WriteLine("Wrong page");
+                        }
                     }
                     else
                     {
-                        MenuBar.Show();
-                        Console.WriteLine("Wrong page");
+                        StartUp.Start();
+                        Console.WriteLine("Non-existent directory");
                     }
                 }
 
@@ -109,7 +136,7 @@ namespace FileManager
                 else
                 {
                     StartUp.Start();
-                    Console.WriteLine("Invalid command.");
+                    Console.WriteLine("Invalid command");
                 }
             }
         }

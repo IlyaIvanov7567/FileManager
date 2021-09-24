@@ -7,34 +7,26 @@ namespace FileManager
     {
         public static void Show(string path)
         {
-            // Check the directory exist
-            if (Directory.Exists(path))
+
+            DirectoryInfo di = new DirectoryInfo(path);
+            DirectoryInfo[] dirs = di.GetDirectories();
+
+            Console.Clear();
+            Console.WriteLine("\t\t\t--Directory: {0}--", di.FullName);
+
+            // Output all directories
+            foreach (var dir in dirs)
             {
-                
-                DirectoryInfo di = new DirectoryInfo(path);
-                DirectoryInfo[] dirs = di.GetDirectories();
-               
-                Console.Clear();
-                Console.WriteLine("\t\t\t--Directory: {0}--", di.FullName);
-
-                // Output all directories
-                foreach (var dir in dirs)
-                {
-                    Console.WriteLine(dir);
-                }
-
-                // Output all files
-                foreach (var file in di.GetFiles())
-                {
-                    Console.WriteLine(file.Name);
-                }
+                Console.WriteLine(dir);
             }
 
-            // Inform, that the directory does not exist
-            else
+            // Output all files
+            foreach (var file in di.GetFiles())
             {
-                Console.WriteLine("Non-existent directory");
+                Console.WriteLine(file.Name);
             }
+            MenuBar.Show();
+
         }
     }
 }
