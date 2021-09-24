@@ -18,6 +18,7 @@ namespace FileManager
                 if (arr[0] == "cdhome" && arr.Length == 1)
                 {
                     HomePage.Home();
+                    MenuBar.Show();
                 }
 
                 // Change directory
@@ -26,6 +27,7 @@ namespace FileManager
                     Properties.Settings.Default.LastDir = input;
                     Properties.Settings.Default.Save();
                     ChangeDir.Show(arr[1]);
+                    MenuBar.Show();
                 }
 
                 // Change directory with paging
@@ -37,9 +39,11 @@ namespace FileManager
                         Properties.Settings.Default.LastDir = input;
                         Properties.Settings.Default.Save();
                         ChangeDirPaging.Show(arr[2], page);
+                        MenuBar.Show();
                     }
                     else
                     {
+                        MenuBar.Show();
                         Console.WriteLine("Wrong page");
                     }
                 }

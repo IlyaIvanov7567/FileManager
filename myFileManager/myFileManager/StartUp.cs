@@ -22,7 +22,7 @@ namespace FileManager
                 ChangeDir.Show(arr[1]);
 
             }
-            else if (arr[0] == "cdp" && arr[1] != null && arr.Length == 3)
+            else if (arr[0] == "cdp" && arr[1] != null && arr.Length == 3 && Directory.Exists(arr[2]))
             {
                 var page = Byte.Parse(arr[1]);
                 ChangeDirPaging.Show(arr[2], page);
@@ -34,7 +34,8 @@ namespace FileManager
                 HomePage.Home();
             }
 
-            Console.WriteLine("\nType help to see a list of available commands");
+            //Console.WriteLine("\nType help to see a list of available commands");
+            MenuBar.Show();
         }
     }
 }
